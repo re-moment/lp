@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RE:MOMENT | 気づかなかった一瞬を、もう一度。</title>
+
+  <meta
+    name="description"
+    content="RE:MOMENTは、気づかなかったまま過ぎ去った人生の時間を、音楽として残すプロジェクトです。"
+  />
+
+  <style>
+    :root {
+      --paper: #f6f2e8;
+      --paper-light: #fbf8f0;
+      --ink: #3f3932;
+      --sub-ink: #6f675e;
+      --line: rgba(47, 43, 38, 0.16);
+      --soft-line: rgba(47, 43, 38, 0.08);
+      --accent: #8a7a66;
+      --button: #2f2b26;
+      --button-text: #f8f4ea;
+      --max-width: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.45), transparent 28%),
+        linear-gradient(180deg, var(--paper-light), var(--paper));
+      color: var(--ink);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(47, 43, 38, 0.09) 0.5px, transparent 0.5px);
+      background-size: 4px 4px;
+      opacity: 0.18;
+      mix-blend-mode: multiply;
+      z-index: 10;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page { position: relative; overflow: hidden; }
+
+    .section {
+      width: min(100% - 40px, var(--max-width));
+      margin: 0 auto;
+      padding: 96px 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 56px 0 80px;
+    }
+
+    .hero-inner {
+      width: min(100% - 40px, var(--max-width));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .brand-mark {
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: var(--sub-ink);
+      margin-bottom: 64px;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(30px, 4.2vw, 54px);
+      font-weight: 400;
+      line-height: 1.75;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-sub {
+      margin-top: 40px;
+      color: var(--sub-ink);
+      font-size: 15px;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-image-wrap { position: relative; }
+
+    .hero-image-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 8% -4% -6% 8%;
+      background: rgba(47, 43, 38, 0.12);
+      filter: blur(28px);
+      z-index: -1;
+    }
+
+    .hero-image {
+      width: 92%;
+      margin-left: auto;
+      border-radius: 2px;
+      box-shadow: 0 24px 60px rgba(47, 43, 38, 0.14), 0 1px 0 rgba(255,255,255,0.6) inset;
+    }
+
+    .scroll-note {
+      margin-top: 72px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--sub-ink);
+    }
+
+    .intro {
+      border-top: 1px solid var(--soft-line);
+      border-bottom: 1px solid var(--soft-line);
+    }
+
+    .narrow { width: min(100%, 720px); margin: 0 auto; }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      color: var(--sub-ink);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      font-size: clamp(22px, 3.2vw, 36px);
+      line-height: 2;
+      font-weight: 400;
+      margin: 0;
+      letter-spacing: 0.08em;
+    }
+
+    .body-copy {
+      margin: 48px 0 0;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 2.25;
+    }
+
+    .memory-list {
+      display: grid;
+      gap: 0;
+      margin: 56px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(15px, 1.8vw, 20px);
+      line-height: 1.7;
+      letter-spacing: 0.1em;
+      color: var(--sub-ink);
+    }
+
+    .memory-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--soft-line);
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .card {
+      padding: 32px 28px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.28);
+      min-height: 260px;
+    }
+
+    .card-number {
+      font-size: 12px;
+      color: var(--sub-ink);
+      letter-spacing: 0.16em;
+      margin-bottom: 28px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+
+    .card p {
+      margin: 28px 0 0;
+      color: var(--sub-ink);
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .works {
+      border-top: 1px solid var(--soft-line);
+      border-bottom: 1px solid var(--soft-line);
+    }
+
+    /* Works: 左テキスト・右画像 */
+    .works-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .work-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 48px;
+    }
+
+    .work-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--soft-line);
+      color: var(--sub-ink);
+    }
+
+    .work-link {
+      text-decoration: none;
+      border-bottom: 1px solid var(--soft-line);
+      transition: border-color 0.2s ease;
+    }
+
+    .work-link:hover {
+      border-bottom-color: var(--ink);
+    }
+
+    .work-title {
+      color: var(--ink);
+      font-size: 18px;
+      letter-spacing: 0.08em;
+    }
+
+    .work-desc {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--sub-ink);
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+    }
+
+    .work-category {
+      flex-shrink: 0;
+      font-size: 13px;
+      color: var(--sub-ink);
+      letter-spacing: 0.1em;
+      padding-top: 4px;
+    }
+
+    .works-image-col {
+      padding-top: 48px;
+    }
+
+    .works-image-wrap {
+      position: relative;
+    }
+
+    .works-image-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 6% -3% -5% 6%;
+      background: rgba(47, 43, 38, 0.10);
+      filter: blur(24px);
+      z-index: -1;
+    }
+
+    .works-image {
+      width: 100%;
+      border-radius: 2px;
+      box-shadow: 0 16px 48px rgba(47, 43, 38, 0.12);
+    }
+
+    .works-image-caption {
+      margin-top: 16px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--sub-ink);
+      text-transform: uppercase;
+    }
+
+    .flow {
+      display: grid;
+      gap: 16px;
+      margin-top: 48px;
+      color: var(--sub-ink);
+      font-size: 15px;
+      letter-spacing: 0.1em;
+    }
+
+    .flow span {
+      display: block;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--soft-line);
+    }
+
+    .cta {
+      text-align: center;
+      padding-bottom: 120px;
+    }
+
+    .cta-main-btn {
+      display: inline-block;
+      padding: 20px 48px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      font-size: clamp(15px, 2vw, 18px);
+      letter-spacing: 0.16em;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .cta-main-btn:hover {
+      background: var(--ink);
+      color: var(--paper-light);
+    }
+
+    .cta-form-note {
+      margin-top: 28px;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--sub-ink);
+    }
+
+    .cta-form-note a {
+      color: var(--sub-ink);
+      text-decoration: none;
+    }
+
+    .cta-form-note a:hover {
+      color: var(--ink);
+    }
+
+    footer {
+      width: min(100% - 40px, var(--max-width));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+      border-top: 1px solid var(--soft-line);
+      color: var(--sub-ink);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 840px) {
+      .section {
+        width: min(100% - 32px, var(--max-width));
+        padding: 72px 0;
+      }
+      .hero { min-height: auto; padding: 32px 0 72px; }
+      .hero-inner {
+        width: min(100% - 32px, var(--max-width));
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+      .hero-image-wrap { order: -1; }
+      .brand-mark { margin-bottom: 40px; }
+      .hero-title { font-size: 34px; line-height: 1.75; }
+      .hero-sub { margin-top: 32px; }
+      .scroll-note { display: none; }
+      .three-grid { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .works-inner { grid-template-columns: 1fr; gap: 40px; }
+      .works-image-col { padding-top: 0; }
+      .work-item { display: block; }
+      .work-item span:last-child { display: block; margin-top: 8px; }
+      .button { width: 100%; }
+      footer { width: min(100% - 32px, var(--max-width)); display: block; }
+      footer div + div { margin-top: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="brand-mark">RE:MOMENT &nbsp;|&nbsp; Memory Switch</div>
+          <h1 class="hero-title">
+            気づかなかった<br />
+            一瞬を、<br />
+            もう一度。
+          </h1>
+        </div>
+        <div class="hero-image-wrap">
+          <img
+            class="hero-image"
+            src="images/hero.jpg"
+            alt="RE:MOMENTの名刺とArtifact"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section intro">
+      <div class="narrow">
+        <div class="section-label">What is RE:MOMENT</div>
+        <p class="lead">
+          人生には、<br />
+          その時には気づかなかったけれど、<br />
+          あとから振り返ると<br />
+          大切だったとわかる時間があります。
+        </p>
+      </div>
+    </section>
+
+    <!-- MEMORY SWITCH -->
+    <section class="section">
+      <div class="narrow">
+        <div class="section-label">Memory Switch</div>
+        <p class="lead">
+          最後になるとは<br />
+          思わなかった日を、<br />
+          覚えていますか？
+        </p>
+        <ul class="memory-list">
+          <li>最後のおんぶ。</li>
+          <li>最後の家族旅行。</li>
+          <li>最後の部活。</li>
+          <li>最後の送別会。</li>
+          <li>最後の瞬間。</li>
+        </ul>
+        <p class="body-copy">
+          あの日が最後になるとは、<br />
+          思わなかった。<br /><br />
+          RE:MOMENTは、<br />
+          人生の中に埋もれていた時間を、<br />
+          もう一度見つけるためのものです。<br /><br />
+          そんな時間を音楽として残す。<br />
+          もう一度気づくための、<br />
+          記憶のスイッチ。
+        </p>
+      </div>
+    </section>
+
+    <!-- THREE MEMORIES -->
+    <section class="section">
+      <div class="section-label">Three Memories</div>
+      <p class="lead">
+        記憶には、<br />
+        いくつかの入口があります。
+      </p>
+      <div class="three-grid">
+        <article class="card">
+          <div class="card-number">10_RM_LIFE</div>
+          <h3>LIFE</h3>
+          <p>親、子、夫婦、兄弟、自分自身。<br />人生の節目に残っている時間を、音楽にする。</p>
+        </article>
+        <article class="card">
+          <div class="card-number">20_RM_PLACE_MOMENTS</div>
+          <h3>PLACE</h3>
+          <p>故郷、学校、喫茶店、山、海。<br />その場所に流れていた時間を残す。</p>
+        </article>
+        <article class="card">
+          <div class="card-number">30_RM_COMMUNITY</div>
+          <h3>COMMUNITY</h3>
+          <p>部活、サークル、会社、チーム。<br />共有された時間を、もう一度動かす。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- WORKS -->
+    <section class="section works">
+      <div class="works-inner">
+        <div>
+          <div class="section-label">Works</div>
+          <p class="lead">
+            記憶は、<br />
+            音楽になり、<br />
+            触れられる形になる。
+          </p>
+          <div class="work-list">
+            <div class="work-item">
+              <div>
+                <a class="work-title work-link" href="https://suno.com/s/NQKAfIMNaipwk3Nl" target="_blank">JI-CHAN</a>
+                <p class="work-desc">「そうだろ」 じいちゃんの声が、まだ聞こえる。</p>
+              </div>
+              <span class="work-category">Life Memory</span>
+            </div>
+            <div class="work-item">
+              <div>
+                <a class="work-title work-link" href="https://suno.com/s/IJ4kDj8GKNmegtnY" target="_blank">MAYA in Summer</a>
+                <p class="work-desc">摩耶山で過ごした、もう戻らない夏のこと。</p>
+              </div>
+              <span class="work-category">Place Memory</span>
+            </div>
+            <div class="work-item">
+              <div>
+                <a class="work-title work-link" href="https://suno.com/s/NQKAfIMNaipwk3Nl" target="_blank">Field to Plate</a>
+                <p class="work-desc">畑から食卓へ。「畑のカレー」の一日。</p>
+              </div>
+              <span class="work-category">Community Memory</span>
+            </div>
+          </div>
+          <p class="body-copy">
+            記憶は、データだけでは残らない。<br />
+            触れられる形にすることで、<br />
+            人生の一部になる。
+          </p>
+        </div>
+        <div class="works-image-col">
+          <div class="works-image-wrap">
+            <img
+              class="works-image"
+              src="images/maya_cd.jpg"
+              alt="摩耶山の夏 — MAYA in Summer"
+            />
+          </div>
+          <p class="works-image-caption">摩耶山の夏 — MAYA in Summer</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="section">
+      <div class="narrow">
+        <div class="section-label">Process</div>
+        <p class="lead">
+          まだ名前のない記憶を、<br />
+          少しずつ形にします。
+        </p>
+        <div class="flow">
+          <span>Memory Collection</span>
+          <span>Interview</span>
+          <span>Song Writing</span>
+          <span>Memory Review</span>
+          <span>Artifact</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta">
+      <a class="cta-main-btn" href="YOUR_FORM_URL" target="_blank">
+        記憶のスイッチを探す →
+      </a>
+      <p class="cta-form-note">
+        <a href="YOUR_FORM_URL" target="_blank">Google Form へ</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>RE:MOMENT | Memory Switch</div>
+    <div>© RE:MOMENT All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
