@@ -319,16 +319,115 @@
       padding-bottom: 120px;
     }
 
-    .cta-main-btn {
-      display: inline-block;
-      padding: 20px 48px;
-      border: 1px solid var(--ink);
+    .cta-title {
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 400;
+      line-height: 2;
+      margin: 0 0 72px;
+      letter-spacing: 0.08em;
+    }
+
+    .memory-form {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-step {
+      margin-bottom: 48px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      color: var(--sub-ink);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .category-btns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .cat-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 18px 12px;
+      border: 1px solid var(--line);
+      background: transparent;
       color: var(--ink);
       font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
-      font-size: clamp(15px, 2vw, 18px);
-      letter-spacing: 0.16em;
-      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .cat-btn span {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--sub-ink);
+    }
+
+    .cat-btn:hover {
+      border-color: var(--ink);
+    }
+
+    .cat-btn.selected {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--paper-light);
+    }
+
+    .cat-btn.selected span {
+      color: rgba(248,244,234,0.7);
+    }
+
+    .email-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-input:focus {
+      border-color: var(--ink);
+    }
+
+    .email-input::placeholder {
+      color: var(--sub-ink);
+      opacity: 0.6;
+    }
+
+    .cta-main-btn {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      font-size: clamp(14px, 1.8vw, 16px);
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      text-align: center;
       transition: background 0.25s ease, color 0.25s ease;
+      margin-top: 8px;
     }
 
     .cta-main-btn:hover {
@@ -336,20 +435,13 @@
       color: var(--paper-light);
     }
 
-    .cta-form-note {
-      margin-top: 28px;
-      font-size: 13px;
-      letter-spacing: 0.14em;
+    .form-note {
+      margin-top: 20px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
       color: var(--sub-ink);
-    }
-
-    .cta-form-note a {
-      color: var(--sub-ink);
-      text-decoration: none;
-    }
-
-    .cta-form-note a:hover {
-      color: var(--ink);
+      text-align: center;
+      min-height: 20px;
     }
 
     footer {
@@ -559,12 +651,35 @@
 
     <!-- CTA -->
     <section class="section cta">
-      <a class="cta-main-btn" href="YOUR_FORM_URL" target="_blank">
-        記憶のスイッチを探す →
-      </a>
-      <p class="cta-form-note">
-        <a href="YOUR_FORM_URL" target="_blank">Google Form へ</a>
-      </p>
+      <h2 class="cta-title">
+        あなたの記憶にも、<br />
+        まだ名前がついていない<br />
+        時間があります。
+      </h2>
+
+      <div class="memory-form">
+        <div class="form-step">
+          <div class="form-label">01 &nbsp;記憶の種類を選ぶ</div>
+          <div class="category-btns">
+            <button class="cat-btn" data-cat="LIFE">LIFE<span>人生の記憶</span></button>
+            <button class="cat-btn" data-cat="PLACE">PLACE<span>場所の記憶</span></button>
+            <button class="cat-btn" data-cat="COMMUNITY">COMMUNITY<span>仲間の記憶</span></button>
+          </div>
+        </div>
+
+        <div class="form-step">
+          <div class="form-label">02 &nbsp;メールアドレスを入れる</div>
+          <div class="email-row">
+            <input class="email-input" type="email" placeholder="your@email.com" />
+          </div>
+        </div>
+
+        <button class="cta-main-btn" id="submit-btn">
+          記憶のスイッチを探す →
+        </button>
+
+        <p class="form-note" id="form-msg"></p>
+      </div>
     </section>
 
   </main>
@@ -573,5 +688,59 @@
     <div>RE:MOMENT | Memory Switch</div>
     <div>© RE:MOMENT All Rights Reserved.</div>
   </footer>
+  <script>
+    const FORMS = {
+      LIFE: "https://docs.google.com/forms/d/e/1FAIpQLSfN4M7jwx3DOLHdsUqp34MFmCasKxHruijbl1iK7kD_hacD-g/viewform",
+      PLACE: "https://docs.google.com/forms/d/e/1FAIpQLSeiw4kINNOaro0fjb_8BNhbj68RQavz1fbpntteYiMDOC-2cQ/viewform",
+      COMMUNITY: "https://docs.google.com/forms/d/e/1FAIpQLScB7bM9TB1zhkLDHJ8_A_yQXkXwPm3KQ0DFVtPeftUJi-WhhQ/viewform"
+    };
+
+    let selectedCat = null;
+
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedCat = btn.dataset.cat;
+      });
+    });
+
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbwcOplCZLp5LvhCrx2zt4tooQHJvPoe8D_Mmtlk1-C-fFkLizk3xowo3xKjjC9UeZhU/exec";
+
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+      const email = document.querySelector('.email-input').value.trim();
+      const msg = document.getElementById('form-msg');
+      const btn = document.getElementById('submit-btn');
+
+      if (!selectedCat) {
+        msg.textContent = '記憶の種類を選んでください。';
+        return;
+      }
+      if (!email || !email.includes('@')) {
+        msg.textContent = 'メールアドレスを入力してください。';
+        return;
+      }
+
+      btn.textContent = '送信中...';
+      btn.style.opacity = '0.6';
+      btn.disabled = true;
+
+      try {
+        await fetch(GAS_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, category: selectedCat })
+        });
+        msg.textContent = '記憶のスイッチが、入りました。まもなくメールをお送りします。';
+        btn.textContent = '送信しました';
+      } catch (err) {
+        msg.textContent = 'エラーが発生しました。もう一度お試しください。';
+        btn.textContent = '記憶のスイッチを探す →';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
