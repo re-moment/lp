@@ -739,6 +739,26 @@
         return;
       }
 
+      const typoDomains = {
+  "gmal.com": "gmail.com",
+  "gmial.com": "gmail.com",
+  "gmail.con": "gmail.com",
+  "gmail.co": "gmail.com",
+  "gnail.com": "gmail.com",
+  "icloud.con": "icloud.com",
+  "yaho.co.jp": "yahoo.co.jp",
+  "yahoo.com.jp": "yahoo.co.jp",
+  "outlok.jp": "outlook.jp",
+  "hotmal.com": "hotmail.com"
+};
+
+const emailDomain = email.split("@")[1]?.toLowerCase();
+
+if (typoDomains[emailDomain]) {
+  msg.textContent = `メールアドレスは「${typoDomains[emailDomain]}」の間違いではありませんか？`;
+  return;
+}
+
       btn.textContent = '送信中...';
       btn.style.opacity = '0.6';
       btn.disabled = true;
