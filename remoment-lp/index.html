@@ -750,7 +750,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, category: selectedCat })
         });
-        msg.textContent = '記憶のスイッチが、入りました。まもなくメールをお送りします。';
+        msg.textContent = '記憶のスイッチが入りました。ご入力いただいたメールアドレスに控えをお送りしました。数分たっても届かない場合は、メールアドレスの入力間違い、または迷惑メールフォルダをご確認ください。';
         btn.textContent = '送信しました';
       } catch (err) {
         msg.textContent = 'エラーが発生しました。もう一度お試しください。';
